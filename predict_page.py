@@ -58,7 +58,6 @@ def predict_salary(age, gn, ed, experience, jt):
     X = pd.DataFrame.from_dict({"Age":[age], "Gender": [gn], "Education Level": [ed], "Years of Experience": [experience], "Category": [category]})
     X["Gender"] = le_gender.transform(X["Gender"])
     X["Education Level"] = le_ed.transform(X["Education Level"])
-    st.write(X)
     X = X.astype(float)
     X = min.transform(X)
 
