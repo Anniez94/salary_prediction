@@ -15,6 +15,7 @@ le_ed = data["le_ed"]
 le_gender = data["le_gender"]
 categories = data["df"]
 min = data["min"]
+le = data["le"]
 
 df = pd.read_csv("Salary Data.csv")
 df = df.dropna()
@@ -54,11 +55,13 @@ def predict_salary(age, gn, ed, experience, jt):
     category = categories[categories["Job Title"] == jt]["Category"].values[0]
 
     # X = np.array([[age, gn, ed, experience, category]])
-    X = pd.DataFrame.from_dict({"Age":[age], "Gender": [gn], "Education Level": [ed], "Years of Experience": [experience], "Category": [category]})
+    X = pd.DataFrame.from_dict({"Age":[age], "Gender": [gn], "Education Level": [ed], "Job Title": [jt], "Years of Experience": [experience], "Category": [category]})
     X["Gender"] = le_gender.transform(X["Gender"])
     X["Education Level"] = le_ed.transform(X["Education Level"])
+    X["Job Title"] = le.transform(X["Job Title"])
     X = X.astype(float)
     X = min.transform(X)
+    st.write(categories)
 
     salary = reg.predict(X)
     return salary
