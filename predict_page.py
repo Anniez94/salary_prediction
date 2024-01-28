@@ -61,7 +61,6 @@ def predict_salary(age, gn, ed, experience, jt):
     X["Job Title"] = le.transform(X["Job Title"])
     X = X.astype(float)
     X = min.transform(X)
-    st.write(categories)
 
     salary = reg.predict(X)
     return salary
